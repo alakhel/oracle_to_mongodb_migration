@@ -56,3 +56,25 @@ HAVING count(rpt.employee_id) > 0;
 exit;
 EOF
 ) | mongoimport --db HR --collection managers
+
+
+
+
+db.products.insert(
+   [
+     { _id: 11, item: "pencil", qty: 50, type: "no.2" },
+     { item: "pen", qty: 20 },
+     { item: "eraser", qty: 25 }
+   ]
+)
+{ "_id" : 11, "item" : "pencil", "qty" : 50, "type" : "no.2" }
+{ "_id" : ObjectId("51e0373c6f35bd826f47e9a0"), "item" : "pen", "qty" : 20 }
+{ "_id" : ObjectId("51e0373c6f35bd826f47e9a1"), "item" : "eraser", "qty" : 25 }
+
+
+
+
+
+var countryId = Object();
+db.country.insert({ _id: countryId, code: 1, name: 'Brasil' });
+db.state.insert({ code: 1, name: 'SC', contry : { $ref: 'country', $id: countryId } });
